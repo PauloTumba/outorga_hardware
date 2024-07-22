@@ -8,8 +8,8 @@
 #define RST_PIN D0 // Pino para RST do módulo RFID
 
 // Credenciais da rede WiFi
-const char* ssid = "Seu Wi-Fi";
-const char* password = "Sua Senha";
+const char* ssid = "Madalorian";
+const char* password = "TUKBJ4B4CT";
 
 // Instância da classe MFRC522 para controle do módulo RFID
 MFRC522 rfid(SS_PIN, RST_PIN);
@@ -51,15 +51,15 @@ void setup() {
         <div id="message"></div>
         <script>
         // var ws = new WebSocket('ws://' + window.location.hostname + ':81/');
-          var ws = new WebSocket('ws://192.168.137.129:81/');
+          var ws = new WebSocket('ws://192.168.0.119:81/');
           //var ws = new WebSocket('ws://127.0.0.1:81/');
 
           ws.onmessage = function(event) {
             var message = event.data;
             document.getElementById('message').innerHTML = 'UID: ' + message;
-            if (message.startsWith('reload:')) {
+            if (message.startsWith('reload:')) {-
               var uid = message.split(':')[1];
-              window.location.href = 'http://127.0.0.1:8002/admin/formado/pesquisa_pulsiraView/' + uid;
+              window.location.href = 'http://127.0.0.1:8003/admin/formado/pesqusaView/' + uid;
             }
           };
         </script>
@@ -84,7 +84,7 @@ void loop() {
     String message = "reload:" + UIDresultSend; // Cria a mensagem WebSocket para enviar
     webSocket.broadcastTXT(message); // Envia a mensagem WebSocket para todos os clientes conectados
     Serial.println("UID sent: " + UIDresultSend); // Imprime o UID enviado no console serial
-    delay(1000); // Aguarda 1 segundo antes de continuar
+    delay(2000); // Aguarda 1 segundo antes de continuar
   }
 }
 
